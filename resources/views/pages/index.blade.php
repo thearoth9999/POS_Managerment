@@ -10,7 +10,7 @@
        
         <!-- END: Top Bar -->
         <div class="grid grid-cols-12 gap-6">
-            <div class="col-span-12 xxl:col-span-9 grid grid-cols-12 gap-6">
+            <div class="col-span-12 xxl:col-span-12 grid grid-cols-12 gap-12">
                 <!-- BEGIN: General Report -->
                 <div class="col-span-12 mt-8">
                     <div class="intro-y flex items-center h-10">

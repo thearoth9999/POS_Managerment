@@ -14,47 +14,25 @@
                         <div class="preview">
                             <div class="text-center"> <a href="javascript:;" data-toggle="modal" data-target="#large-modal-size-preview" class="button inline-block bg-theme-1 text-white">Add New</a> </div>
                                 <div class="modal" id="large-modal-size-preview">
-                                    <div class="modal__content modal__content--lg p-5 text-center">
+                                    <div class="modal__content modal__content--lg p-5 ">
                                         <div class="flex items-center px-5 py-5 md:py-3 border-b border-gray-200">
                                             <h2 class="font-medium text-base mr-auto">
-                                                Add Product
+                                                Add Currency
                                             </h2>
                                         </div>
                                         <form action="#">
-                                            <div class="p-5 grid grid-cols-12 gap-6 row-gap-6">
-                                                <div class="col-span-12 md:col-span-6">
-                                                    <label class="font-medium text-base mr-auto" >Product Name </label>
-                                                    <input type="text" class="input w-full border mt-2 flex-1" placeholder="">
+                                            <div class="p-5 grid grid-cols-12 gap-12 row-gap-12">
+                                                <div class="col-span-12 md:col-span-12">
+                                                    <label class="font-medium text-base mr-auto">Currency Name</label>
+                                                    <input type="text" class="input w-full border mt-2 flex-1" placeholder="Currency Name ">
                                                 </div>
-                                                <div class="col-span-12 md:col-span-6">
-                                                    <label class="font-medium text-base mr-auto">Product Code</label>
-                                                    <input type="text" class="input w-full border mt-2 flex-1" placeholder="">
+                                                <div class="col-span-12 md:col-span-12">
+                                                    <label class="font-medium text-base mr-auto">Currency Code</label>
+                                                    <input type="text" class="input w-full border mt-2 flex-1" placeholder="Currency Code">
                                                 </div>
-                                                <div class="col-span-12 md:col-span-6">
-                                                    <label class="font-medium text-base mr-auto">Product Categories</label>
-                                                    <input type="text" class="input w-full border mt-2 flex-1" placeholder="">
-                                                </div>
-                                                <div class="col-span-12 md:col-span-6">
-                                                    <label class="font-medium text-base mr-auto">Brand</label>
-                                                    <select class="input w-full border mt-2 flex-1">
-                                                        <option>10</option>
-                                                        <option>25</option>
-                                                        <option>35</option>
-                                                        <option>50</option>
-                                                    </select>
-                                                </div>
-                                                <div class="col-span-12 md:col-span-6">
-                                                    <label class="font-medium text-base mr-auto">Product Price</label>
-                                                    <input type="text" class="input w-full border mt-2 flex-1" placeholder="">
-                                                </div>
-                                                <div class="col-span-12 md:col-span-6">
-                                                    <label class="font-medium text-base mr-auto">Product Unit</label>
-                                                    <select class="input w-full border mt-2 flex-1">
-                                                        <!-- <option>10</option>
-                                                        <option>25</option>
-                                                        <option>35</option>
-                                                        <option>50</option> -->
-                                                    </select>
+                                                <div class="col-span-12 md:col-span-12">
+                                                    <label class="font-medium text-base mr-auto">Symbol</label>
+                                                    <input type="text" class="input w-full border mt-2 flex-1" placeholder="Symbol">
                                                 </div>
                                                
                                             </div>

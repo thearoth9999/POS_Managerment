@@ -1,4 +1,5 @@
 <?php
+use Illuminate\Http\Request;
 
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\LoginController;
@@ -15,6 +16,9 @@ use App\Http\Controllers\SupplierController;
 use App\Http\Controllers\AdjustmentController;
 use App\Http\Controllers\SellController;
 use App\Http\Controllers\SettingController;
+use App\Http\Controllers\CurreciesController;
+use App\Http\Controllers\PosController;
+use App\Http\Controllers\BrandController;
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -26,7 +30,7 @@ use App\Http\Controllers\SettingController;
 |
 */
 
-Route::get('/login', [LoginController::class, 'index']);
+Route::get('/', [LoginController::class, 'index']);
 
 Route::get('/dashboard', [DashboardController::class, 'index'])->name('dashboard');
 Route::get('/product', [ProductController::class, 'index'])->name('product');
@@ -41,3 +45,10 @@ Route::get('/warehouse', [WarehouseController::class, 'index'])->name('warehouse
 Route::get('/adjustment', [AdjustmentController::class, 'index'])->name('adjustment');
 Route::get('/sale', [SellController::class, 'index'])->name('sale');
 Route::get('/setting', [SettingController::class, 'index'])->name('setting');
+Route::get('/currency', [CurreciesController::class, 'index'])->name('currency');
+Route::get('/pos', [PosController::class, 'index'])->name('pos');
+Route::get('/brand', [BrandController::class, 'index'])->name('brand');
+
+Route::post('/category/post',[CategoryController::class, 'store'])->name('category.store');
+Route::get('/category/show',[CategoryController::class, 'show'])->name('category.show');
+
