@@ -51,4 +51,5 @@ Route::get('/brand', [BrandController::class, 'index'])->name('brand');
 
 Route::post('/category/post',[CategoryController::class, 'store'])->name('category.store');
 Route::get('/category/show',[CategoryController::class, 'show'])->name('category.show');
+Route::get('/category/update',[CategoryController::class, 'edit'])->name('category.update');
 
