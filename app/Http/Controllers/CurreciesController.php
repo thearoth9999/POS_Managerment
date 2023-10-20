@@ -11,7 +11,7 @@ class CurreciesController extends Controller
      */
     public function index()
     {
-        return view('pages.currency');
+        // return view('pages.currency');
     }
 
     /**
