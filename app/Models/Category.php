@@ -15,5 +15,6 @@ class Category extends Model
         'name',
         'image',
         'description',
+        'active'
     ];
 }

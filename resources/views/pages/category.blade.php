@@ -22,19 +22,10 @@
                                                 Add Category
                                             </h2>
                                         </div>
-                                        @if(Session::has('success'))
-                                        <div class="alert alert-success">
-                                            {{ Session::get('success') }}
-                                            @php
-                                                Session::forget('success');
-                                            @endphp
-                                        </div>
-                                        @endif
-                                        
-                                        <form action="{{ Route('category.store')}}" method="POST" enctype="multipart/form-data" id="form">
+                                        <form action="{{ route('category.store')}}" method="POST" enctype="multipart/form-data" id="form" class="validate-form">
                                             <input type="hidden" name="id" id="id">
                                             @csrf
-                                            @if ($errors->any())
+                                            @if (count($errors))
                                                 <div class="alert alert-danger">
                                                     <ul>
                                                         @foreach ($errors->all() as $error)
@@ -46,10 +37,11 @@
                                                 <div class="p-5 grid grid-cols-12 gap-6 row-gap-6">
                                                     <div class="col-span-12 md:col-span-12">
                                                         <label class="font-medium text-base mr-auto">Category Name</label>
-                                                        <input type="text"  class="input w-full border mt-2 @error('name') is-invalid @enderror" placeholder="Category Name" name="category" id="category" required>
-                                                        @error('name')
+                                                        <input type="text"  class="input w-full border mt-2" placeholder="Category Name" name="category" id="category" required>
+                                                        {{-- @error('name')
                                                             <span class="sm:ml-auto mt-1 sm:mt-0 text-xs text-gray-600">{{ $$error->name }}</span>
-                                                        @enderror
+                                                        @enderror --}}
+                                                        {{-- <label id="name-error" class="error" for="name">This field is required.</label> --}}
                                                     </div>
                                                     <div class="col-span-12 md:col-span-12">
                                                         <div class="intro-y col-span-12 lg:col-span-6">
@@ -59,7 +51,7 @@
                                                                     <div class="preview">
                                                                         <!-- <form data-file-types="image/jpeg|image/png|image/jpg" action="/file-upload" class="dropzone border-gray-200 border-dashed"> -->
                                                                             <div class="fallback">
-                                                                                <input id="image" name="image" type="file" />
+                                                                                <input id="image" name="image" type="file"/>
                                                                             </div>
                                                                             <div class="dz-message" data-dz-message>
                                                                                 <div class="text-lg font-medium">Drop files here or click to upload.</div>
@@ -104,7 +96,7 @@
     <!-- </div> -->
 
     <div class="intro-y datatable-wrapper box p-5 mt-5">
-        <table class="table table-report table-report--bordered display w-full no-footer dtr-inline category_tb" id="category_tb" role="grid" style="width: 806px;">
+        <table class="table table-report table-report--bordered display w-full no-footer dtr-inline category_tb text-center" id="category_tb" role="grid" style="width: 806px;">
             <thead>
                 <tr role="row">
                     <th class="border-b-2 whitespace-no-wrap sorting_asc" tabindex="0"  rowspan="1" colspan="1" style="width: 166px;" aria-sort="ascending" >#</th>

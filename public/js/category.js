@@ -52,8 +52,16 @@ $(document).ready(function() {
                 $("#btn-submit").text("Update");
                 $("#id").val(data.id);
                 $("#category").val(data.name);
-                $("#image").attr("src",data.image);
+                $("#image").attr("value",data.image);
                 $("#description").val(data.description);
+                if(data.success){
+                    Swal.fire(
+                        'Your Data has been Updated.',
+                        'You clicked the button!',
+                        'success'
+                    )
+                }
+               
             },
             // error: function (data) {
             //     console.log('Error:', data);
@@ -63,33 +71,73 @@ $(document).ready(function() {
     
   
     $(document).on("click","#btn-delete",function() {
-        
+        Swal.fire({
+            title: 'Are you sure?',
+            text: "You won't be able to revert this!",
+            icon: 'warning',
+            showCancelButton: true,
+            confirmButtonColor: '#3085d6',
+            cancelButtonColor: '#d33',
+            confirmButtonText: 'Yes, delete it!'
+          }).then((result) => {
+            if (result.isConfirmed) {
+                var id = $(this).attr("data-id");
+                $.ajax({
+                    headers: {
+                        'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+                    },
+                    url: "/category/delete?id="+id,
+                    type: "Post",
+                    dataType: 'json',
+                    success: function (data) {
+                        
+                        if(data.success){
+                            Swal.fire(
+                                'Your Data has been Deleted.',
+                                'You clicked the button!',
+                                'success'
+                            )
+                            
+                        }           
+                    },
+                    // error: function (data) {
+                    //     console.log('Error:', data);
+                    // }
+                });
+                    Swal.fire(
+                        'Deleted!',
+                        'Your file has been deleted.',
+                        'success'
+                    )
+                    }
+            })
     });
 
-    $("#form").submit(function() {
-        var data = $(this).serialize();
-
-        // Validate the name field
-        // if ($("#name").val(), $("#description").val() == "") {
-        //     alert("Please enter your name");
-        //     return false;
-        // }
-
-        // Validate the description field
-        // if ($("#description").val() == "") {
-        //     alert("Please enter a description");
-        //     return false;
-        // }
-
-        // Validate the image field
-        // if ($("#image").val() == "") {
-        //     alert("Please select an image");
-        //     return false;
-        // }
-
-        // The form is valid, so submit it
-        return true;
-    });
+    // $("#form").submit(function(e) {
+    //     // var data = $(this).serialize();
+    //     e.preventDefault();
+    //     $.ajax({
+    //         headers: {
+    //             'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+    //         },
+    //         url: "/category/post",
+    //         type: "Post",
+    //         dataType: 'json',
+    //         success: function (data) {
+    //             if(data.success){
+    //                 Swal.fire(
+    //                     'Good job!',
+    //                     'You clicked the button!',
+    //                     'success'
+    //                 )    
+    //             }
+                       
+    //         },
+    //     // //     // error: function (data) {
+    //     // //     //     console.log('Error:', data);
+    //     // //     // }
+    //     });
+    // });
 
     function Clear_data(){
         $(".header-category").text("Add Category");

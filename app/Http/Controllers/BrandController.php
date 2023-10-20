@@ -1,7 +1,6 @@
 <?php
 
 namespace App\Http\Controllers;
-
 use Illuminate\Http\Request;
 use App\Models\Brand;
 use Yajra\Datatables\Datatables;
@@ -31,17 +30,31 @@ class BrandController extends Controller
      */
     public function store(Request $request)
     {
-        // $category = new Category();
-        // $category->name = $request->input('category');
-        // $category->description = $request->input('description');
-        // // $category->status = 1;
-        // if ($request->file('image')) {
-        //     $image = $request->file('image');
-        //     $filename = time() . '.' . $image->extension();
-        //     $image->move(public_path('img'), $filename);
-        //     $category->image = $filename;
+        $brand = new Brand();
+        if($request->id == "" && $request->id == null){
+            $brand->name = $request->input('brand');
+            $brand->active = 1;
+            if ($request->file('image')) {
+                $image = $request->file('image');
+                $filename = time() . '.' . $image->extension();
+                $image->move(public_path('img'), $filename);
+                $brand->image = $filename;
 
-        // }
+            }
+        $brand->save();
+        }else{
+            if ($request->file('image')) {
+                $image = $request->file('image');
+                $new_image = time() . '.' . $image->extension();
+                $image->move(public_path('img'), $new_image);
+                
+            }
+            $update_brand= Brand::where('id',$request->id)->update([
+                'name' => $request->input('brand'),
+                // 'image'=> $request->file('image'),
+            ]);
+        }
+        
         // Validator::make($request->all(), [
         //     'file' => 'required|mimes:pdf,xlx,csv|max:2048',
         //     'name' => 'required|string',
@@ -50,8 +63,8 @@ class BrandController extends Controller
         //     'name.required' => 'Name field is required.',
         //     'description.required'=> 'Name field is required.'
         // ])->validate();
-        // $category->save();
-        // return redirect()->route('category')->with('success','Successful uploaded image');
+        return redirect()->route('brand');
+        // dd([$request->name,$request->image]);
     }
 
     /**
@@ -59,28 +72,23 @@ class BrandController extends Controller
      */
     public function show(Request $request)
     {
-        // if ($request->ajax()){
-        //     $data = Category::get();
-        //     return Datatables::of($data)
-        //                 ->addIndexColumn()
-        //                 // ->addColumn('action', function($row){
-           
-        //                 //         $btn = '<button  data-rowid="'.$row->id.'" id="edit-btn" class="btn-edit button inline-block bg-theme-12 text-white">Edit</button>'.' '.
-        //                 //                 '<button   data-rowid="'.$row->id.'" id="btn_delete"class="btn-delete button inline-block bg-theme-6 text-white">Delete</button>';
-        //                 //         return $btn;
-        //                 // })
-        //                 ->rawColumns(['action'])
-        //                 ->make(true);
+        if ($request->ajax()){
+            $data = Brand::where('active',1)->get();
+            return Datatables::of($data)
+                        ->addIndexColumn()
+                        ->rawColumns(['action'])
+                        ->make(true);
                         
-        // }
+        }
     }
 
     /**
      * Show the form for editing the specified resource.
      */
-    public function edit(string $id)
+    public function edit(Request $request)
     {
-        //
+        $up_brand = Brand::find($request->id);
+        return response()->json($up_brand);
     }
 
     /**
@@ -94,8 +102,13 @@ class BrandController extends Controller
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(string $id)
+    public function destroy(Request $request)
     {
-        //
+        $del_brand= Brand::where('id',$request->id)->update([
+            'active' => 0
+        ]);
+        return response()->json(['success'=>'Your data has beed deleted']);
+        // dd($del_category);
+
     }
 }
